@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCD to Gray Code Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input {
+            margin: 10px;
+            padding: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>BCD to Gray Code Converter</h1>
+    
+    <label for="bcdInput">Enter BCD value (4 bits):</label>
+    <input type="text" id="bcdInput" maxlength="4" placeholder="e.g., 1001">
+    
+    <button onclick="convertToGray()">Convert to Gray Code</button>
+    
+    <div class="result" id="result"></div>
+
+    <script>
+        function convertToGray() {
+            let bcd = document.getElementById("bcdInput").value;
+            
+            // Validate input (must be 4-bit binary)
+            if (bcd.length !== 4 || !/^[01]+$/.test(bcd)) {
+                document.getElementById("result").innerHTML = "Please enter a valid 4-bit binary number.";
+                return;
+            }
+
+            // Convert BCD to Gray code
+            let gray = bcd[0]; // First bit remains the same
+            for (let i = 1; i < bcd.length; i++) {
+                gray += (bcd[i - 1] ^ bcd[i]); // XOR each bit with the previous bit
+            }
+
+            document.getElementById("result").innerHTML = `Gray Code: ${gray}`;
+        }
+    </script>
+</body>
+</html>
